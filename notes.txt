@@ -17,3 +17,11 @@ kubectl get svc
 
 kubectl get nodes -o wide
 http://<NODE-IP>:30007
+
+
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+use this if you mistakenly push .terrafrom 
+python -m git_filter_repo --path terraform/envs/dev/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.68.0/windows_386/terraform-provider-azurerm_v4.68.0_x5.exe --invert-paths
