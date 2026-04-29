@@ -1,0 +1,12 @@
+az acr list --resource-group dev-rg --output table
+
+az acr login --name <your-acr-name>
+
+
+build and push 
+docker build -t <acr-name>.azurecr.io/myapp:v1 .
+docker push <acr-name>.azurecr.io/myapp:v1
+
+
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
