@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+permissions:
+  contents: write
 
 jobs:
   build-and-deploy:
@@ -50,4 +52,4 @@ jobs:
         git config user.email "actions@github.com"
         git add k8s-manifests/deployments.yaml
         git commit -m "Update image to ${{ github.sha }}" || echo "No changes"
-        git push
+        git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
