@@ -30,7 +30,7 @@ jobs:
 
     - name: Build and Push Docker Image
       run: |
-        docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/myapp:${{ github.sha }} .
+        docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/myapp:${{ github.sha }} ./app
         docker push ${{ secrets.ACR_NAME }}.azurecr.io/myapp:${{ github.sha }}
 
     - name: Set AKS Context
