@@ -10,3 +10,10 @@ docker push <acr-name>.azurecr.io/myapp:v1
 
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
+
+
+kubectl get pods
+kubectl get svc
+
+kubectl get nodes -o wide
+http://<NODE-IP>:30007
