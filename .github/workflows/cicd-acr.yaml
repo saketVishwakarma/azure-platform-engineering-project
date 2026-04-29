@@ -33,9 +33,21 @@ jobs:
         docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/myapp:${{ github.sha }} ./app
         docker push ${{ secrets.ACR_NAME }}.azurecr.io/myapp:${{ github.sha }}
 
-    - name: Set AKS Context
-      run: az aks get-credentials --resource-group dev-rg --name dev-aks
+    #- name: Set AKS Context
+    #  run: az aks get-credentials --resource-group dev-rg --name dev-aks
 
-    - name: Deploy to AKS
+    #- name: Deploy to AKS
+    #  run: |
+     #   kubectl set image deployment/myapp myapp=${{ secrets.ACR_NAME }}.azurecr.io/myapp:${{ github.sha }}
+    
+    - name: Update Kubernetes Manifest
       run: |
-        kubectl set image deployment/myapp myapp=${{ secrets.ACR_NAME }}.azurecr.io/myapp:${{ github.sha }}
+        sed -i "s|image:.*|image: ${{ secrets.ACR_NAME }}.azurecr.io/myapp:${{ github.sha }}|" k8s-manifests/deployments.yaml
+
+    - name: Commit and Push Changes
+      run: |
+        git config user.name "github-actions"
+        git config user.email "actions@github.com"
+        git add k8s-manifests/deployments.yaml
+        git commit -m "Update image to ${{ github.sha }}" || echo "No changes"
+        git push

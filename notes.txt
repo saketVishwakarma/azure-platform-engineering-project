@@ -4,6 +4,10 @@ az acr login --name <your-acr-name>
 
 
 build and push 
+
+if docker is not working in our cloud env 
+we can use 
+az acr build   --registry devacr2s15r   --image myapp:v1   ./azure-platform-engineering-project/app
 docker build -t <acr-name>.azurecr.io/myapp:v1 .
 docker push <acr-name>.azurecr.io/myapp:v1
 
