@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: devacr2s15r.azurecr.io/myapp:v1
+        image: devacr2s15r.azurecr.io/myapp:9c4b28d926937f39537793ea548dea15805c1959
         ports:
         - containerPort: 5000
